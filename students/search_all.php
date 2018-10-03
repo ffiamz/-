@@ -1,5 +1,5 @@
 <?php
-$sql = mysqli_connect('localhost', 'root', '262359for*', 'sems');
+$sql = mysqli_connect("localhost", "manager","123xyz,", "sems");
 if(!$sql){
 	die("connect failed");
 }

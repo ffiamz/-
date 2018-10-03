@@ -1,5 +1,5 @@
 <?php
-$sql = mysqli_connect('localhost', 'root', '262359for*', 'sems');
+$sql = mysqli_connect("localhost","manager","123xyz,", "sems");
 $id = $_POST["id"];
 
 $result = mysqli_query($sql,

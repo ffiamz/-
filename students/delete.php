@@ -1,6 +1,6 @@
 <?php
 $id = $_GET["id"];
-$sql = mysqli_connect("localhost","root","262359for*","sems");
+$sql = mysqli_connect("localhost","manager","123xyz,","sems");
 if(!$sql){
 	die("connect error ".mysqli_connect_error());
 }
