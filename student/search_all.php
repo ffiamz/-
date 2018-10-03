@@ -5,7 +5,7 @@ if(!$sql){
 }
 
 $result = mysqli_query($sql,
-	"select student_id, student_name, student_gender from tb_student");
+	"select studentId, studentName, studentGender from tb_student");
 if($result){
 	$ret= mysqli_fetch_all($result, MYSQLI_ASSOC);
 }else{

@@ -27,13 +27,13 @@
 	<script>
 		function infoToTbody(rst){
 			var tmp;
-			if(rst.student_gender=="1"){
+			if(rst.studentGender=="1"){
 				tmp="男";
 			}else tmp="女";
-			var tmp_str="<tr><td>"+rst.student_id+
-				"</td><td>"+rst.student_name+
+			var tmp_str="<tr><td>"+rst.studentId+
+				"</td><td>"+rst.studentName+
 				"</td><td>"+tmp+"</td><td>"+
-				"<a href='delete.php?id="+rst.student_id+
+				"<a href='delete.php?id="+rst.studentId+
 				"' onclick='return confirm(\"确认删除？\")'>删除"+
 				"</a></td></tr>";
 			//window.alert(tmp_str);

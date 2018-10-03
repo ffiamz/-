@@ -3,8 +3,8 @@ $sql = mysqli_connect("localhost","manager","123xyz,", "sems");
 $id = $_POST["id"];
 
 $result = mysqli_query($sql,
-	"select student_id, student_name, student_gender from tb_student where ".
-	"student_id = ".$id);
+	"select studentId, studentName, studentGender from tb_student where ".
+	"studentId = ".$id);
 if($result){
 	$ret= mysqli_fetch_assoc($result);
 }else{

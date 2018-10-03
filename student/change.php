@@ -8,8 +8,8 @@ if(!$sql){
 }
 
 $ret = mysqli_query($sql,
-	"update tb_student set student_name=\"".$name.
-	"\", student_gender=".$gender." where student_id=".$id);
+	"update tb_student set studentName=\"".$name.
+	"\", studentGender=".$gender." where studentId=".$id);
 
 if($ret){
 	echo "succeeded";

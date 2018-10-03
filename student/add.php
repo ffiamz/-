@@ -8,7 +8,7 @@ if(!$sql){
 }
 
 $ret = mysqli_query($sql,
-	"insert into tb_student (student_id,student_name,student_gender) values(".
+	"insert into tb_student (studentId,studentName,studentGender) values(".
 	$id. ",\"". $name. "\",". $gender.")");
 
 if($ret){

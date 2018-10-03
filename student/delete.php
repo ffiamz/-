@@ -5,7 +5,7 @@ if(!$sql){
 	die("connect error ".mysqli_connect_error());
 }
 $ret = mysqli_query($sql,
-	"delete from tb_student where student_id=".$id);
+	"delete from tb_student where studentId=".$id);
 
 if($ret){
 	echo "succeeded";
