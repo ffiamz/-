@@ -23,7 +23,7 @@ function queryTeacherName($conn, $teacherId)
         echo "请输入学号";
         return;
     }
-    $conn = new mysqli("localhost", "root", "", "SEMS");
+    $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
         die("Connect error: ". $conn->connect_error);
     }
@@ -50,7 +50,7 @@ function queryTeacherName($conn, $teacherId)
     <th>CourseName</th>
     <th>CourseCredit</th>
     <th>CourseClass</th>
-    <th>Capatity/Remain</th>
+    <th>Capacity/Remain</th>
     </tr>";
     
     while($data = $result->fetch_array(MYSQLI_NUM)){

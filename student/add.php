@@ -14,7 +14,7 @@ $ret = mysqli_query($sql,
 if($ret){
 	echo "succeeded";
 }else{
-	echo "failed";
+	echo "failed" . $sql->error;
 }
 mysqli_close($sql);
 
