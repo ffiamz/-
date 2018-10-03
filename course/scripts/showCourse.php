@@ -15,7 +15,7 @@ function queryTeacherName($conn, $teacherId)
 }
     
     $studentId = $_GET['studentId'];
-    $conn = new mysqli("localhost", "root", "", "SEMS");
+    $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
         die("Connect error: ". $conn->connect_error);
     }
@@ -26,7 +26,7 @@ function queryTeacherName($conn, $teacherId)
     $result = $conn->query($sql);
     if(count($result->fetch_array(MYSQLI_NUM))==0){
         echo "您还没注册，请先注册，在开始选课！<br>";
-        echo "<a>前往注册</a><br>";
+        echo "<a href='../../student/student_add.html'>前往注册</a><br>";
         $conn->close();
         return;
     }
@@ -45,7 +45,7 @@ function queryTeacherName($conn, $teacherId)
     <th>CourseName</th>
     <th>CourseCredit</th>
     <th>CourseClass</th>
-    <th>Capatity/Remain</th>
+    <th>Capacity/Remain</th>
     </tr>";
     
     while($row = $result->fetch_array(MYSQLI_ASSOC)){

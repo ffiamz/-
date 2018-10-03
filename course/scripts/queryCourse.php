@@ -20,7 +20,7 @@ function queryTeacherName($conn, $teacherId)
         return ;
     }
     
-    $conn = new mysqli("localhost", "root", "", "SEMS");
+    $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
         die("Connect error: ".$conn->connect_error);
     }
@@ -50,7 +50,7 @@ function queryTeacherName($conn, $teacherId)
     <th>CourseName</th>
     <th>CourseCredit</th>
     <th>CourseClass</th>
-    <th>Capatity/Remain</th>
+    <th>Capacity/Remain</th>
     </tr>";
     
     foreach ($course as $row){ 
@@ -62,7 +62,7 @@ function queryTeacherName($conn, $teacherId)
     echo "<td>" . $row['CourseName'] . "</td>";
     echo "<td>" . $row['CourseCredit'] . "</td>";
     echo "<td>" . $row['CourseClass'] . "</td>";
-    echo "<td>" . $row['Capatity'] .'/'. $row['Remain'] . "<a href='updateCapatity.php?courseId=".$row['CourseId']."' >修改</a></td>";
+    echo "<td>" . $row['Capatity'] .'/'. $row['Remain'] . "<a href='updateCapacity.php?courseId=".$row['CourseId']."' >修改</a></td>";
     echo "</tr>";
     }
     

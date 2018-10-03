@@ -15,7 +15,7 @@ function updateCourseRemain($conn, $courseId, $value)
     $courseId = $_GET['courseId'];
     $teacherId = $_GET['teacherId'];
     
-    $conn = new mysqli("localhost", "root", "", "SEMS");
+    $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
         die("Connect Errot: ".$conn->connect_error);
     }

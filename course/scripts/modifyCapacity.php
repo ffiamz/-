@@ -2,7 +2,7 @@
     $courseId = $_GET['courseId'];
     $update = $_GET['updateCourse'];
     
-    $conn = new mysqli("localhost", "root", "", "SEMS");
+    $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
         echo "Connect error: ". $conn->connect_error. "<br>";
     }
