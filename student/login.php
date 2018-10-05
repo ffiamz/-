@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if($_GET['action']=="logout"){
+if(isset($_GET['action']) && $_GET['action']=="logout"){
 	unset($_SESSION['student_login_id']);
 	echo "logout success";
 	exit;

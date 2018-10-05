@@ -7,12 +7,12 @@ if(isset($_SESSION['student_login_id'])){
 		</a></li>";
 
 }else{
-	echo "<li><a href='/sems/student/student_login.html'>登陆</a></li>
-		<li><a href='/sems/student/student_add.html'>注册</a></li>";
+	echo "<li><a href='/sems/student/student_login.php'>登陆</a></li>
+		<li><a href='/sems/student/student_add.php'>注册</a></li>";
 }
 
-echo "<li><a href='/sems/course/main.html'>课程</a></li>
-	<li><a href='/sems/student/student_change.html'>个人信息</a></li>
-	<li><a href='/sems/student/student_search.html'>学生信息</a></li>
+echo "<li><a href='/sems/course/main.php'>课程</a></li>
+	<li><a href='/sems/student/student_change.php'>个人信息</a></li>
+	<li><a href='/sems/student/student_search.php'>学生信息</a></li>
 	</ul></div>";
 ?>

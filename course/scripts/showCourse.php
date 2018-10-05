@@ -14,7 +14,14 @@ function queryTeacherName($conn, $teacherId)
     return $data[0];
 }
     
-    $studentId = $_GET['studentId'];
+    //$studentId = $_GET['studentId'];
+    session_start();
+    if(!isset($_SESSION['student_login_in'])){
+        echo "您还未登录，请先登录";
+        echo "<a href='../../student/student_login.html'>前往登陆</a>";
+    }
+    $studentId = $_SESSION['student_login_in'];
+    
     $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
         die("Connect error: ". $conn->connect_error);

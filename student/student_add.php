@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>-->
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -6,7 +7,8 @@
 </head>
 <body>
 	<h2>学生选课管理系统</h2>
-	<?php include($_SERVER['DOCUMENT_ROOT']."\\sems\\share\\header.php"); ?>
+	<?php include $_SERVER['DOCUMENT_ROOT']."/sems/share/header.php";
+	?>
 	<div>					
 		<div class="mainblock">
 			<form action="add.php" method="post"/>
