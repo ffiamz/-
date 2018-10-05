@@ -2,30 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<script>
-			function selectCourse(studentId)
-{
-	xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function (){
-		if(xmlhttp.readyState==4 && xmlhttp.status==200){
-			document.getElementById("course").innerHTML = xmlhttp.responseText;
-		}
-	}
-	xmlhttp.open("GET", "scripts/showCourse.php?studentId="+studentId);
-	xmlhttp.send();
-}
-
-function selectedCourse()
-{
-}
-
-		</script>
+		<link rel="stylesheet" type="text/css" href="/sems/share/style.css"/>
+		<title>学生选课管理系统</title>
 	</head>
 	
 	<body>
-		<h2>学生选课管理系统</h2>
-		<?php include $_SERVER['DOCUMENT_ROOT']."/sems/share/header.php";?>
 		
+		<?php include $_SERVER['DOCUMENT_ROOT']."/sems/share/header.php";?>
+		<div class="mainblock">
+		  <div class="mcontain">
 		<form action="scripts/showCourse.php">
 			<!--输入学号，开始选课-->
 			学号: <input type="text" name="studentId" value="3840">
@@ -65,6 +50,8 @@ function selectedCourse()
 		<br />
 		
 		<div id="course"></div>
+		</div>
+	</div>
 	</body>
 	
 </html>

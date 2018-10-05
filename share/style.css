@@ -1,0 +1,82 @@
+
+/* for tag*/
+body, input, button, select, textarea {
+	//font: 12px/1.5 Tahoma, Helvetica, "SimSun", sans-serif;
+	color: #444;
+}
+body, ul, ol, li, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset, .pr, .pc {
+	margin: 0;
+	padding: 0;
+}
+a {
+	color: #333;
+	text-decoration:none
+}
+ul li, .xl li {
+	list-style: none;
+}
+
+table tr td {
+	padding-left:20px;
+}
+form input {
+	margin:10px;
+}
+form input[type=submit] {
+	width:150px;
+}
+
+/*for class and  id*/
+#titleheader{
+	margin: 0 auto;
+	width: 960px;
+	padding: 10px 0 0;
+}
+#header {
+	height: 34px;
+	line-height: 34px;
+	background:black;
+}
+#header .link li {
+	float: left;
+	padding-right: 1px;
+	font-weight: 700;
+	font-size: 14px;
+}
+#header .link li a {
+	float: left;
+	padding: 0 15px;
+	color: #fff;
+}
+#header .link li:hover{
+	background:#D00000;/*red;*/
+}
+#header .helper li {
+	float: right;
+	display: inline;
+	margin: 5px 8px 0;
+	height: 24px;
+	background: white;
+	line-height: 24px;
+	text-align: center;
+	color: #336699;
+	font-weight: 700;
+	width: 60px;
+	margin: 5px 8px 0;
+	border-radius: 5px;
+}
+
+
+.mainblock {
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+	margin: 0 auto;
+	width: 960px;
+	padding: 10px 0 0;
+}
+.mcontain {
+	padding-left: 50px;
+	padding-top: 10px;
+	padding-bottom: 50px;
+}
+

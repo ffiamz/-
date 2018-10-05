@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/ html; charset=utf-8" />
-	<title>students</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="/sems/share/style.css"/>
+	<title>学生选课管理系统</title>
 </head>
 <body>
-	<h2>学生选课管理系统</h2>
 	<?php include($_SERVER['DOCUMENT_ROOT']."\\sems\\share\\header.php"); ?>
 	<div>					
 		<div class="mainblock">
+		  <div class="mcontain">
 			学号<input type="text" name="id" id="input_id">
 			<button type="button" onclick="lookupOne();">查找</button>
 			<table>
-				<thead>
-					<tr>
-						<td>学号</td>
-						<td>姓名</td>
-						<td>性别</td>
-						<td></td>
-					</tr>
-				</thead>
-				<tbody id="student_table">
-				</tbody>
+			  <thead>
+				<tr>
+				  <td>学号</td>
+				  <td>姓名</td>
+				  <td>性别</td>
+				  <td></td>
+				</tr>
+			  </thead>
+			  <tbody id="student_table">
+			  </tbody>
 			</table>
+		  </div>
 		</div>
 	</div>
 	<script>
