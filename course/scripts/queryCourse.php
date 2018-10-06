@@ -62,7 +62,7 @@ function queryTeacherName($conn, $teacherId)
     echo "<td>" . $row['CourseName'] . "</td>";
     echo "<td>" . $row['CourseCredit'] . "</td>";
     echo "<td>" . $row['CourseClass'] . "</td>";
-    echo "<td>" . $row['Capatity'] .'/'. $row['Remain'] . "<a href='updateCapacity.php?courseId=".$row['CourseId']."' >修改</a></td>";
+    echo "<td>" . $row['Capacity'] .'/'. $row['Remain'] . "<a href='updateCapacity.php?courseId=".$row['CourseId']."' >修改</a></td>";
     echo "</tr>";
     }
     

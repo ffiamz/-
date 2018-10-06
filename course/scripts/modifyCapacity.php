@@ -8,7 +8,7 @@
     }
     $conn->set_charset("utf8");
     
-    $sql = "SELECT Capatity, Remain FROM tb_course WHERE CourseId=".$courseId."";
+    $sql = "SELECT Capacity, Remain FROM tb_course WHERE CourseId=".$courseId."";
     $result = $conn->query($sql);
     if($result==False){
         echo "查询容量失败<br>";
@@ -23,7 +23,7 @@
         return;
     }
     
-    $sql = "UPDATE tb_course SET Capatity=".$update." WHERE CourseId=".$courseId."";
+    $sql = "UPDATE tb_course SET Capacity=".$update." WHERE CourseId=".$courseId."";
     if($conn->query($sql)==FALSE){
         echo "更新容量失败！<br>";
         $conn->close();
