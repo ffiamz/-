@@ -47,7 +47,7 @@ function queryTeacherName($conn, $teacherId)
     echo "<td>" . $row['CourseName'] . "</td>";
     echo "<td>" . $row['CourseCredit'] . "</td>";
     echo "<td>" . $row['CourseClass'] . "</td>";
-    echo "<td>" . $row['Capatity'] .'/'. $row['Remain'] .  "</td>";
+    echo "<td>" . $row['Capacity'] .'/'. $row['Remain'] .  "</td>";
     echo "</tr>";
     echo "</table>";
     
@@ -55,10 +55,10 @@ function queryTeacherName($conn, $teacherId)
 ?>
 
 <br>
-<form action='modifyCapatity.php'>
+<form action='modifyCapacity.php'>
 <input type="hidden" name="courseId" value=<?php echo $row['CourseId']; ?> ><br>
-容量/已选：<?php echo $row['Capatity']."/".$row['Remain']; ?>==>
-修改容量：<input type="text" name="updateCourse" value=<?php echo $row['Capatity']; ?> > <br>
+容量/已选：<?php echo $row['Capacity']."/".$row['Remain']; ?>==>
+修改容量：<input type="text" name="updateCourse" value=<?php echo $row['Capacity']; ?> > <br>
 <input type="submit" value="提交"> 
 </form>
 注意：修改后的课程容量不能小于已选人数！<br>

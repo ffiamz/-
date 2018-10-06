@@ -16,11 +16,11 @@ function queryTeacherName($conn, $teacherId)
     
     //$studentId = $_GET['studentId'];
     session_start();
-    if(!isset($_SESSION['student_login_in'])){
+    if(!isset($_SESSION['student_login_id'])){
         echo "您还未登录，请先登录";
         echo "<a href='../../student/student_login.html'>前往登陆</a>";
     }
-    $studentId = $_SESSION['student_login_in'];
+    $studentId = $_SESSION['student_login_id'];
     
     $conn = new mysqli("localhost", "manager", "123xyz,", "SEMS");
     if($conn->connect_error){
@@ -63,7 +63,7 @@ function queryTeacherName($conn, $teacherId)
     echo "<td>" . $row['CourseName'] . "</td>";
     echo "<td>" . $row['CourseCredit'] . "</td>";
     echo "<td>" . $row['CourseClass'] . "</td>";
-    echo "<td>" . $row['Capatity'] .'/'. $row['Remain'] .  "</td>";
+    echo "<td>" . $row['Capacity'] .'/'. $row['Remain'] .  "</td>";
     echo "</tr>";
     }
     echo "</table>";
