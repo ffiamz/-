@@ -4,6 +4,7 @@ from django import forms
 from model.admin import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from django.contrib import auth
 
 def register(request):
     if request.method == 'POST':
@@ -18,7 +19,20 @@ def register(request):
     context['form'] = form
     return render(request, 'register.html', context)
 
-def add_user(request):
-    user_id = request.POST.get('name','')
-    password = request.POST.get('password','')
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return HttpResponseRedirect('/index')
+        else:
+            return HttpResponseRedirect('/login')
+    else:
+        return render(request, 'login.html')
 
+        
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect("/index")

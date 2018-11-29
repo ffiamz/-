@@ -4,14 +4,6 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-class User(AbstractBaseUser):
-    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    user_name = models.CharField(max_length=30, unique=True)
-    create_time = models.DateTimeField(default=datetime.datetime.now)
-    email = models.EmailField()
-    USERNAME_FIELD = 'user_name'
-    REQUIRED_FIELD = ['email']
-
 
 class UserManager(BaseUserManager):
     def create_user(self, user_name, email, password=''):
@@ -24,21 +16,32 @@ class UserManager(BaseUserManager):
         return user
 
 
+class User(AbstractBaseUser):
+    user_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    user_name = models.CharField(max_length=30, unique=True)
+    create_time = models.DateTimeField(default=datetime.datetime.now)
+    email = models.EmailField()
+
+    objects = UserManager()
+    USERNAME_FIELD = 'user_name'
+    REQUIRED_FIELD = ['email']
+
+
 class Blog(models.Model):
     blog_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
 
 
 class Group_User(models.Model):
     group_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    name = models.CharField(max_length=30),
-    Theme = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
+    theme = models.CharField(max_length=30)
 
 
 class User_Blog_Collect_Relation(models.Model):
     blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
-    create_time = models.DateTimeField()
+    create_time = models.DateTimeField(default=datetime.datetime.now)
     description = models.CharField(max_length=100)
     class Meta:
         unique_together = ("blog_id", "user_id")

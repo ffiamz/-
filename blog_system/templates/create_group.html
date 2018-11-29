@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block main %}
+<form method="post" action="/create_group">
+    {% csrf_token %}
+    组名:<input type="text" name="name"></br>
+    主题:<input type="text" name="theme"></br>
+    <input type="submit" value="提交">
+</form>
+{% endblock %}

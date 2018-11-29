@@ -4,6 +4,11 @@
         <title>{{ title }}</title>
     </head>
     <body>
+        {% if user.is_authenticated %}
+        login
+        {% else %}
+        not login
+        {% endif %}
         hello
         {% block main%}
         {% endblock %}

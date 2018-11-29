@@ -16,10 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from . import user, view 
+from . import user
+from model import views
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    url(r'^index$', view.index),
+    url(r'^index$', views.index),
+
+    url(r'^groups$', views.groups),
+    url(r'^create_group$', views.create_group),
+
+    url(r'^users$', views.users),
     url(r'^register$', user.register),
+    url(r'^login$', user.login),
+    url(r'^logout$', user.logout)
 ]

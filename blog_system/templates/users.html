@@ -1,0 +1,7 @@
+users
+{% extends 'base.html' %}
+{% block main %}
+    {% for u in users %}
+        {{ u }}
+    {% endfor %}
+{% endblock%}
