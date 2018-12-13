@@ -38,23 +38,23 @@ class Group_User(models.Model):
 
 
 class User_Blog_Collect_Relation(models.Model):
-    blog_id = models.ForeignKey(Blog, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
     create_time = models.DateTimeField(default=datetime.datetime.now)
     description = models.CharField(max_length=100)
     class Meta:
-        unique_together = ("blog_id", "user_id")
+        unique_together = ("blog", "user")
 
 
 class User_Group_Relation(models.Model):
-    group_id = models.ForeignKey(Group_User, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL,
+    group = models.ForeignKey(Group_User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
             on_delete=models.CASCADE)
     status = models.CharField(max_length=1, 
-            choices=(('a','管理员'),('c','创建者'),('m','成员')), default='c')
+            choices=(('a','管理员'),('c','创建者'),('m','参与者')), default='c')
     class Meta:
-        unique_together = ("group_id", "user_id")
+        unique_together = ("group", "user")
 
 
 # Create your models here.

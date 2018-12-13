@@ -21,14 +21,29 @@ def create_group(request):
     if request.method == 'POST':
         name = request.POST.get('name','')
         theme = request.POST.get('theme', '')
-        info = [name, theme]
+        info = [name, theme, request.user.user_id]
         ret = rest.create_group(info)
         if ret > 0:
             return HttpResponseRedirect('/groups')
-        else:
-            return render(request, 'create_group.html')
-    else:
-        return render(request, 'create_group.html')
+    return render(request, 'create_group.html')
+
+def join_group(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
+    if request.method == 'GET':
+        user_id = request.user.user_id
+        group_id = request.GET.get('group_id')
+        ret = rest.add_user_into_group([user_id, group_id])
+    return HttpResponseRedirect('/groups')
+
+def delete_group():
+    pass
+
+def collect_blog():
+    pass
+
+def remove_blog_from_collect():
+    pass
     
 
 

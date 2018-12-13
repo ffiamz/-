@@ -1,4 +1,26 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 {% block main %}
-index
+<div class="jumbotron text-center " 
+     style="background:url({% static 'img/bg.jpg'%}); background-size:cover; color:#ffffff; text-shadow:1px 1px 1px #000;"> 
+        <div >
+        <h1 class="display-3">博客系统</h1>
+        <p>朱洪东 王闯</p>
+            <form class="form-inline" style="display:block">
+            <input class="form-control mr-sm-2" type="text" placeholder="搜索博客" aria-label="Search">
+            <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="提交">
+        </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                一些边上的内容
+            </div>
+            <div class="col-sm-8">
+                主要的内容
+                填充：啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% block main %}
-<form method="post" action="/register">
+<div class="form-page-div">
+<form class="form-page" method="post" action="/register">
     <!--
     用户名:<input type="text" name="name"></br>
     密码:<input type="password" name="password"></br>
     -->
     {% csrf_token %}
-    {{ form  }}
-    <input type="submit" value="提交">
+    {% for field in form %}
+    <div class="form-group">
+        {{ field }}
+    </div>
+    {% endfor %}
+    <input class="btn btn-lg btn-block btn-primary" type="submit" value="提交">
 </form>
+</div>
 {% endblock %}

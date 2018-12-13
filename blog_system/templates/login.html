@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block main %}
-<form method="post" action="/login">
-    {% csrf_token %}
-    用户名:<input type="text" name="username"></br>
-    密码:<input type="password" name="password"></br>
-    <input type="submit" value="提交">
-</form>
+<div class="form-page-div">
+    <form class="form-page" method="post" action="/login">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="username" placeholder="用户名"></br>
+        <input class="form-control" type="password" name="password" placeholder="密码"></br>
+        <input class="btn btn-lg btn-block btn-primary" type="submit" value="提交">
+    </form>
+</div>
 {% endblock %}

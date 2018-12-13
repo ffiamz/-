@@ -4,13 +4,22 @@ from django import forms
 from model.models import User
 
 class UserCreationForm(forms.ModelForm):
-    password1 = forms.CharField(label='密码', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='密码确认', widget=forms.PasswordInput)
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        placeholder = {'user_name':'用户名', 'email':'邮箱',
+                'password1':'密码','password2':'密码确认'}
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class':'form-control',
+                'placeholder':placeholder[field]
+                })
+
+    password1 = forms.CharField(widget=forms.PasswordInput)
+    password2 = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = User
         fields = ('user_name','email')
-        #(('user_name','用户名'), ('email','邮箱'))
  
     def clean_password2(self):
         # Check that the two password entries match
