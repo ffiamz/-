@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
 <div class="form-page-div">
-    <form class="form-page" method="post" action="/create_group">
+    <form class="form-page" method="post" action="/create_team">
         {% csrf_token %}
         <input class="form-control" type="text" name="name" placeholder="组名"></br>
         <input class="form-control" type="text" name="theme" placeholder="主题"></br>

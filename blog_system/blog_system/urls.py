@@ -16,15 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from . import user
-from model import views
+from model import views, user
 
 urlpatterns = [
     #path('admin/', admin.site.urls),
     url(r'^index$', views.index),
 
-    url(r'^groups$', views.groups),
-    url(r'^create_group$', views.create_group),
+    url(r'^teams$', views.teams),
+    url(r'^create_team$', views.create_team),
+    path('team/<uuid:team_id>', views.team),
+    path('join_team/<uuid:team_id>', views.join_team),
+    path('leave_team/<uuid:team_id>', views.leave_team),
 
     url(r'^users$', views.users),
     url(r'^register$', user.register),

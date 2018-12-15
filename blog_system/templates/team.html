@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container">
+    {{ team.name}}
+    {{ creator.user_name}}
+    {% for m in members %}
+    {{m.user_name}}
+    {% endfor %}
+    {% if status == 'c' %}
+    <a href='/delete_team/{{team.team_id}}'>解散</a>
+    <a href='#'>写博</a>
+    {% elif status == 'm' %}
+    <a href='/leave_team/{{team.team_id}}'>离开</a>
+    <a href='#'>写博</a>
+    {% elif status == 'n' %}
+    <a href='/join_team/{{team.team_id}}'>加入</a>
+    {% endif%}
+</div>
+{% endblock %}

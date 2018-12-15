@@ -1,43 +1,75 @@
+from .models import *
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from . import rest
 
 def index(request):
     return render(request, 'index.html')
 
 def users(request):
-    us = rest.get_all_users()
+    us = User.objects.all()
     return render(request, 'users.html', 
             {'users': us})
 
-def groups(request):
-    gs = rest.get_all_groups()
-    return render(request, 'groups.html',
-            {'groups': gs})
+def teams(request):
+    gs = Team.objects.all()
+    return render(request, 'teams.html',
+            {'teams': gs})
 
-def create_group(request):
+def create_team(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
     if request.method == 'POST':
         name = request.POST.get('name','')
         theme = request.POST.get('theme', '')
-        info = [name, theme, request.user.user_id]
-        ret = rest.create_group(info)
-        if ret > 0:
-            return HttpResponseRedirect('/groups')
-    return render(request, 'create_group.html')
+        team = Team.objects.create(name=name, theme=theme)
+        Join.objects.create(user=request.user, team=team, status='c')
+        return HttpResponseRedirect('/teams')
+    return render(request, 'create_team.html')
 
-def join_group(request):
+def team(request, team_id):
+    try:
+        team = Team.objects.get(team_id=team_id)
+        creator = User.objects.get(team=team, join__status='c')
+        members = User.objects.filter(team=team, join__status='m')
+        status = 'n'
+        if request.user.is_authenticated:
+            cur = Join.objects.filter(team=team, user=request.user)
+            if cur.exists():
+                status = cur.first().status
+        else:
+            status = 'nu'
+    except:
+        return HttpResponseRedirect('/teams')
+    return render(request, 'team.html', {'team':team, 'creator':creator,
+        'members':members, 'status':status })
+
+
+def join_team(request, team_id):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
-    if request.method == 'GET':
-        user_id = request.user.user_id
-        group_id = request.GET.get('group_id')
-        ret = rest.add_user_into_group([user_id, group_id])
-    return HttpResponseRedirect('/groups')
+    try:
+        team = Team.objects.get(team_id=team_id)
+        Join.objects.create(user=request.user, team=team, status='m')
+    except:
+        pass
+    return HttpResponseRedirect('/team/%s'%team_id)
 
-def delete_group():
-    pass
+def leave_team(request, team_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
+    try:
+        team = Team.objects.get(team_id=team_id)
+        Join.objects.filter(user=request.user,team=team).delete()
+    except:
+        pass
+    return HttpResponseRedirect('/team/%s'%team_id)
+
+
+def delete_team(request, team_id):
+    team=Team.objects.get(team_id=team_id)
+    if Join.objects.get(user=request.user,team=team).status == 'c':
+        team.delete()
+
 
 def collect_blog():
     pass
