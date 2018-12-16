@@ -77,14 +77,23 @@ WSGI_APPLICATION = 'blog_system.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE' : 'django.db.backends.mysql',
+
             'NAME' : 'blog_system',
-            'USER' : 'manager',
-            'PASSWORD' : '123xyz',
+
+            'USER' : 'root',
+
+            'PASSWORD' : '',
+
             'HOST' : 'localhost',
+
             'PORT' : '3306', 
+
             'OPTIONS': {
+
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+
             }
+        
         }
 }
 

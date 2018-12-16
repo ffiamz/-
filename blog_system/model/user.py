@@ -5,6 +5,7 @@ from model.admin import UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.contrib import auth
+from .models import Blog
 
 def register(request):
     if request.method == 'POST':
@@ -19,6 +20,7 @@ def register(request):
     context['form'] = form
     return render(request, 'register.html', context)
 
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username', '')
@@ -26,6 +28,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
+            # return render(request, '/index', {'blogs': Blog.objects.all()})
             return HttpResponseRedirect('/index')
         else:
             return HttpResponseRedirect('/login')

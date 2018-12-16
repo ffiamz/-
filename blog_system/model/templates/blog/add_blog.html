@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的博客</title>
+    <style type="text/css">
+        .blog{
+            padding: 20px 0px;
+        }
+        .blog .info span{
+            padding-right: 10px;
+        }
+        .blog .summary{
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+function back(){
+    location.href = "{% url 'blog_view' %}";
+}
+</script>
+
+        <div class="blog_post" style="padding-top: 20px;">
+            <h3>编辑博客</h3>
+            <form action="." method="post">
+                {% csrf_token %}
+                <div>
+                    <fieldset class="module aligned">
+                        <div class="form-row field-title">
+                            <div>
+                                <label class="required" for="id_title">标题：</label>
+                                <input name="title" class="vTextFiled" id="id_title" required=""
+                                       type="text" maxlength="30" value="我的第一篇博客文章">
+                                <span></span><span></span>
+
+                                <label class="required" for="id_category">分类：</label>
+                                <input name="category" class="vTextFiled"  id="id_category" required=""
+                                       type="text" maxlength="30" value="生活">
+                                <span></span><span></span>
+
+                                <label for="id_tag">标签：</label>
+                                <input name="tag" class="vTextFiled" id="id_tag" type="text" maxlength="150">
+                                (多个标签之间以 ',' 分隔)
+
+                            </div>
+                        </div>
+                        <div class="form-row field-content">
+                            <div>
+                                <label class="required" for="id_content">内容：</label>
+                                <textarea name="content" class="vLargeTextField" id="id_content"
+                                          required="" rows="10" cols="40"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="submit-row">
+
+
+
+
+                </div>
+                <button type="submit" style="margin-top: 10px ">提交</button>
+                <input type="button" value="放弃编辑" onclick="back()">
+            </form>
+        </div>
+
+</body>
+</html>
