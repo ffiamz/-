@@ -11,18 +11,22 @@ import markdown
 def index(request):
     return render(request, 'index.html', {'blogs': Blog.objects.all()})
 
-
 def users(request):
     us = User.objects.all()
     return render(request, 'users.html', 
             {'users': us})
-
 
 def teams(request):
     gs = Team.objects.all()
     return render(request, 'teams.html',
             {'teams': gs})
 
+def myteams(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
+    gs = Team.objects.filter(join__user=request.user)
+    return render(request, 'teams.html',
+            {'teams': gs})
 
 def create_team(request):
     if not request.user.is_authenticated:
@@ -34,7 +38,6 @@ def create_team(request):
         Join.objects.create(user=request.user, team=team, status='c')
         return HttpResponseRedirect('/teams')
     return render(request, 'create_team.html')
-
 
 def team(request, team_id):
     try:
@@ -82,8 +85,18 @@ def delete_team(request, team_id):
         team.delete()
 
 
-def collect_blog():
-    pass
+def collect(request, blog_id):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
+    blog = Blog.objects.get(id=blog_id)
+    Collect.objects.create(user=request.user, blog=blog)
+    return HttpResponseRedirect('/blogs')
+
+def collections(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
+    blogs = Blog.objects.filter(collection__user=request.user)
+    return render(request, 'blog/blog_list.html', {'blogs':blogs})
 
 
 def remove_blog_from_collect():
@@ -290,18 +303,6 @@ def search(request):
     return render(request, 'index.html', {'blogs': post_list, 'author': request.user})
 
 
-def collect(request, blog_id):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect('/login')
-    blog = Blog.objects.get(id=blog_id)
-    Collect.objects.create(user=request.user, blog=blog)
-    return HttpResponseRedirect('/blogs')
-
-def collections(request):
-    if not request.user.is_authenticated:
-        return HttpResponseRedirect('/login')
-    blogs = Blog.objects.filter(collection__user=request.user)
-    return render(request, 'blog/blog_list.html', {'blogs':blogs})
 
 
     
