@@ -291,17 +291,17 @@ def search(request):
 
 
 def collect(request, blog_id):
-    if not request.uesr.is_authenticated:
+    if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
     blog = Blog.objects.get(id=blog_id)
     Collect.objects.create(user=request.user, blog=blog)
     return HttpResponseRedirect('/blogs')
 
 def collections(request):
-    if not request.uesr.is_authenticated:
+    if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
-    blogs = Blog.objects.filter(collection_user=request.user)
-    return render(request, 'collection.html', blogs=blogs)
+    blogs = Blog.objects.filter(collection__user=request.user)
+    return render(request, 'blog/blog_list.html', {'blogs':blogs})
 
 
     
