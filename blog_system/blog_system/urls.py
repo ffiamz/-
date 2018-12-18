@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^index$', views.index),
 
     url(r'^teams$', views.teams),
+    path('myteams', views.myteams),
     url(r'^create_team$', views.create_team),
     path('team/<uuid:team_id>', views.team),
     path('join_team/<uuid:team_id>', views.join_team),
