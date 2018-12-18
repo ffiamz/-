@@ -168,10 +168,12 @@ def update_blog(request, blog_id):
 
 # 展示博客列表
 def get_blogs(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('/login')
     # blogs = Blog.objects.all().order_by('-pub')  # 获得所有的博客按时间排序
     blogs = Blog.objects.filter(author=request.user)
     # print(blogs[0], ' ', blogs[0].author, ' ', blogs[0].content)
-    return render_to_response('blog/blog_list.html', {'blogs': blogs, 'author': request.user})  # 传递context: blogs参数到指定页面
+    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'author': request.user})  
 
 
 def get_index_detail(request, blog_id):
@@ -182,14 +184,12 @@ def get_index_detail(request, blog_id):
     else:
         # 阅读量加1
         blog.increase_views()
-
         # markdown 格式转换
         blog.content = markdown.markdown(blog.content,
                                          extensions=[
                                              # 包含 缩写、表格等常用扩展
                                              'markdown.extensions.extra',
                                              'markdown.extensions.codehilite',
-
                                          ])
 
         if request.method == 'GET':
@@ -227,14 +227,12 @@ def get_details(request, blog_id):
     else:
         # 阅读量加1
         blog.increase_views()
-
         # markdown 格式转换
         blog.content = markdown.markdown(blog.content,
                                          extensions=[
                                              # 包含 缩写、表格等常用扩展
                                              'markdown.extensions.extra',
                                              'markdown.extensions.codehilite',
-
                                          ])
 
         if request.method == 'GET':
@@ -290,6 +288,21 @@ def search(request):
         return render(request, 'blog/blog_list.html', {'error_msg': error_msg})
     post_list = Blog.objects.filter(Q(title__icontains=q) | Q(content__icontains=q))
     return render(request, 'index.html', {'blogs': post_list, 'author': request.user})
+
+
+def collect(request, blog_id):
+    if not request.uesr.is_authenticated:
+        return HttpResponseRedirect('/login')
+    blog = Blog.objects.get(id=blog_id)
+    Collect.objects.create(user=request.user, blog=blog)
+    return HttpResponseRedirect('/blogs')
+
+def collections(request):
+    if not request.uesr.is_authenticated:
+        return HttpResponseRedirect('/login')
+    blogs = Blog.objects.filter(collection_user=request.user)
+    return render(request, 'collection.html', blogs=blogs)
+
 
     
 

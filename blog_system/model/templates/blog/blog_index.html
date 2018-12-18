@@ -1,4 +1,4 @@
-
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,9 @@
     </style>
 </head>
 <body>
-
+-->
+{% extends 'base.html'%}
+{% block main %}
 <script>
 function back(){
     location.href = "/index";
@@ -109,5 +111,4 @@ function back(){
     </div>
 </div>
 
-</body>
-</html>
+{% endblock %}

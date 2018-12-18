@@ -51,9 +51,6 @@ class Join(models.Model):
 
 
 class Category(models.Model):
-    """
-    博客分类
-    """
     name = models.CharField(u'名称', max_length=30)
 
     class Meta:
@@ -96,9 +93,7 @@ class Tag(models.Model):
 
 
 class Blog(models.Model):
-    # 文章作者默认为管理员
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
     title = models.CharField(u'标题', max_length=30)
     # author = models.CharField(u'作者', max_length=30)
     content = models.TextField(u'内容')
@@ -127,7 +122,6 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, verbose_name=u'博客')  # （博客--评论：一对多）
     # name = models.CharField(u'称呼', max_length=30)
@@ -143,7 +137,6 @@ class Comment(models.Model):
         return self.content
 
 
-# Create your models here.
 class Collection(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -153,3 +146,4 @@ class Collection(models.Model):
     class Meta:
         unique_together = ("blog", "user")
         db_table = 'UBCR'
+

@@ -1,13 +1,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
+    <head>
+        {% extends 'base.html'%}
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
 
-    <meta charset="UTF-8">
-    <title>{{ blog.title }}</title>
-    <style type="text/css">
+        <meta charset="UTF-8">
+        <title>{{ blog.title }}</title>
+        <style type="text/css">
         .blog{
             padding: 20px 0px;
         }
@@ -18,96 +19,87 @@
             padding-top: 20px;
         }
 
-    </style>
-</head>
-<body>
+        </style>
+    </head>
+    <body>
+        {% block main %}
+        <div class="container", style="margin-top:20px">
+            <script>
+                function back(){
+                    location.href = "{% url 'blog_view' %}";
+                }
+            </script>
 
-<script>
-function back(){
-    location.href = "{% url 'blog_view' %}";
-}
-</script>
+            <div class="header">
+                <span><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></span>
+            </div>
 
-<div class="header">
-    <span><a href="{% url 'blog_get_detail' blog.id %}">{{ blog.title }}</a></span>
-</div>
+            <div class="content">
+                <div class="blog">
+                    <div class="title">
+                        <h2>{{ blog.title }}</h2>
+                    </div>
+                    <div class="info">
+                        <span class="category" style="color: #ff9900; ">{{ blog.category }}</span>
+                        <span class="author" style="color: #4a86e8">{{ blog.author }}</span>
+                        <span class="pub" style="color: #6aa84f">{{ blog.pub }}</span>
+                        <!--<span class="delete" style="color: #6aa84f"></span>-->
+                        <span class="views" style="color: #4a86e8">阅读量：{{ blog.views }}</span>
+                        <a href="{% url 'delete_blog' blog.id %}">删除文章</a>
+                        <a href="{% url 'update_blog' blog.id %}">编辑博客</a>
+                        <br>
+                        {% for tag in blog.tag.all %}
+                        <span class="tags" style="color: #ff9900;">{{ tag.name }}</span>
+                        {% empty %}
+                        {% endfor %}
+                        <br>
+                    </div>
+                    <div class="content">
+                        {{ blog.content | safe }}
+                    </div>
 
-<div class="content">
-    <div class="blog">
-        <div class="title">
-            <h2>{{ blog.title }}</h2>
-        </div>
-        <div class="info">
-            <span class="category" style="color: #ff9900; ">{{ blog.category }}</span>
-            <span class="author" style="color: #4a86e8">{{ blog.author }}</span>
-            <span class="pub" style="color: #6aa84f">{{ blog.pub }}</span>
-            <!--<span class="delete" style="color: #6aa84f"></span>-->
-            <span class="views" style="color: #4a86e8">阅读量：{{ blog.views }}</span>
-            <a href="{% url 'delete_blog' blog.id %}">删除文章</a>
-            <a href="{% url 'update_blog' blog.id %}">编辑博客</a>
-            <br>
-            {% for tag in blog.tag.all %}
-            <span class="tags" style="color: #ff9900;">{{ tag.name }}</span>
-            {% empty %}
-            {% endfor %}
-            <br>
-        </div>
-        <div class="content">
-            {{ blog.content | safe }}
-        </div>
+                    <!--评论表单-->
+                    <div class="comment-post" style="padding-top: 20px;">
+                        <h3>提交评论</h3>
+                        <form action="{% url 'blog_get_detail' blog.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12" style="padding-top: 10px; ">
+                                    <label class="required" for="id_comment">评论：</label>
+                                    <input name="content" class="vTextFiled"  
+                                        id="id_comment" required="" type="text" maxlength="150" >
+                                </div>
+                            </div>
 
-        <!--评论表单-->
-        <div class="comment-post" style="padding-top: 20px;">
-            <h3>提交评论</h3>
-            <form action="{% url 'blog_get_detail' blog.id %}" method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-md-12" style="padding-top: 10px; ">
-                        <!--<label for="{{ form.content.id_for_label }}">评论：</label>-->
-                        <label class="required" for="id_comment">评论：</label>
-                        <input name="content" class="vTextFiled"  id="id_comment" required=""
-                                       type="text" maxlength="150" >
+                                <button type="submit" style="margin-top: 10px ">提交</button>
+                                <input type="button" value="返回" onclick="back()">
+                        </form>
+                </div>
+                <!--评论内容-->
+                <div class="comment">
+
+                    <div class="comment-display" style="padding-top: 20px;">
+                        <h3>评论 {{ blog.comment_set.count }} 条</h3>
+                        <ul class="comment-list list-unstyled">
+                            {% for comment in comments %}
+                            <li class="comment-item">
+                                <span class="nickname">{{ comment.name }}</span>
+                                <time class="submit-date">{{ comment.pub }}</time>
+                                <div class="text">
+                                    {{ comment.content }}
+                                </div>
+                            </li>
+                            {% empty %}
+                            暂无评论
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-                    <!--
-                </div>
-                {% for field in form %}
-                    <div class="input-field" style="padding-top: 10px;">
-                        {{ field.label }}:{{ field }}
-                    </div>
-                    <div class="error" style="color: red; ">
-                        {{ field.errors }}
-                    </div>
-                {% endfor %}-->
 
-                <button type="submit" style="margin-top: 10px ">提交</button>
-                <input type="button" value="返回" onclick="back()">
-            </form>
-        </div>
-        <!--评论内容-->
-        <div class="comment">
 
-            <div class="comment-display" style="padding-top: 20px;">
-                <h3>评论 {{ blog.comment_set.count }} 条</h3>
-                <ul class="comment-list list-unstyled">
-                {% for comment in comments %}
-                <li class="comment-item">
-                    <span class="nickname">{{ comment.name }}</span>
-                    <time class="submit-date">{{ comment.pub }}</time>
-                    <div class="text">
-                        {{ comment.content }}
-                    </div>
-                </li>
-                {% empty %}
-                暂无评论
-                {% endfor %}
-                </ul>
             </div>
         </div>
-
-
-    </div>
-</div>
-
-</body>
+        </div>
+        {% endblock %} 
+    </body>
 </html>
