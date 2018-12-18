@@ -126,6 +126,7 @@ def add_blog(request):
             # clearned_data['tag'] = Tag.insert_tag(request.POST.get('tag').split(','))
 
             tag_list = Tag.insert_tag(clearned_data['tag'].split(','))
+            print(clearned_data['tag'], '\n', tag_list)
             clearned_data.pop('tag')
             # print(clearned_data)
 
@@ -272,10 +273,11 @@ def get_details(request, blog_id):
 
 # 实现文章归档
 def archives(request, year, month):
-    post_list = Blog.objects.filter(pub__year=year,
-                                    pub__month=month
-                                    )
-    print('year ', year, 'month', month, len(post_list))
+    # post_list = Blog.objects.filter(pub__year=year,
+    #                                pub__month=month
+    #                               )
+    post_list = Blog.objects.filter(pub__startswith='%d-%d'%(year, month), author=request.user)
+    # print('year ', year, 'month', month, len(post_list))
     return render(request, 'blog/blog_list.html', {'blogs': post_list, 'author': request.user})
 
 

@@ -9,17 +9,7 @@
 
     <meta charset="UTF-8">
     <title>我的博客</title>
-    <style type="text/css">
-        .blog{
-            padding: 20px 0px;
-        }
-        .blog .info .creation span{
-            padding-right: 10px;
-        }
-        .blog .summary{
-            padding-top: 20px;
-        }
-    </style>
+
 </head>
 <body>
 
@@ -35,12 +25,13 @@
         <div class="container" style="margin-top:20px">
             <div class="row">
                 <div class="col-sm-4">
-                    <!--
+
                         <div class="widget widget-archives">
                             <h3 class="widget-title">归档</h3>
                             {% archives as date_list %}
                             <ul>
                                 {% for date in date_list %}
+                                <br>
                                 <li>
                                     <a href="{% url 'archives' date.year date.month %}">{{ date.year }}年 {{ date.month }} 月</a>
                                 </li>
@@ -49,13 +40,14 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                    -->
+
                         <!--文章分类-->
                         <div class="widget widget-category">
                             <h3 class="widget-title">分类</h3>
                             {% get_categories as category_list %}
                             <ul>
                                 {% for category in category_list %}
+                                <br>
                                 <li>
                                     <a href="{% url 'category' category.pk %}">{{ category.name }}
 
@@ -73,6 +65,7 @@
                             {% get_tags as tag_list %}
                             <ul>
                                 {% for tag in tag_list %}
+                                <br>
                                 <li>
                                     <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
                                 </li>
@@ -86,6 +79,8 @@
                 </div>
                 <div class="col-sm-8">
                     {% for blog in blogs %}
+                    <br>
+
                     <div align="left" class="blog">
                         <div class="title">
                             <a href="{% url 'blog_get_detail' blog.id %}"><h2>{{ blog.title }}</h2></a>

@@ -1,92 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% extends 'base.html' %}
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'md_css/monokai.css' %}">
 
     <meta charset="UTF-8">
-    <title>{{ blog.title }}</title>
-    <style type="text/css">
-        .blog{
-            padding: 20px 0px;
-        }
-        .blog .info span{
-            padding-right: 10px;
-        }
-        .blog .summary{
-            padding-top: 20px;
-        }
+    <title>写文章</title>
 
-    </style>
 </head>
 <body>
 
+    {% block main %}
 <script>
 function back(){
-    location.href = "/index";
+    location.href = "{% url 'blog_view' %}";
 }
 </script>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <form method="POST" action="{% url 'update_blog' blog.id %}">
+                    {% csrf_token %}
+                    <!--标题-->
+                    <div class="form-group">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ blog.title }}">
 
-        <div class="blog_post" style="padding-top: 20px;">
-            <h3>编辑博客</h3>
-            <form action="{% url 'update_blog' blog.id %}" method="post">
-                {% csrf_token %}
-                <div>
-                    <fieldset class="module aligned">
-                        <div class="form-row field-title">
-                            <div>
-                                <label class="required" for="id_title">标题：</label>
-                                <input name="title" class="vTextFiled" id="id_title" required=""
-                                       type="text" maxlength="30" value="{{ blog.title }}">
+                    </div>
+                    <!--正文-->
+                    <div class="form-group">
+                        <label for="body">正文</label>
+                        <textarea type="text" class="form-control" id="body" name="content" rows="12">{{ blog.content }}</textarea>
+                    </div>
 
-                                <span></span><span></span>
+                    <br><br>
+                    <label for="id_category">分类：</label>
+                    <input name="category" class="vTextFiled"  id="id_category" required=""
+                                       type="text" maxlength="30" value="{{ blog.category }}">
+                    <label for="id_tag">标签：</label>
+                    <input name="tag" class="vTextFiled" id="id_tag" type="text" maxlength="150">
+                        (多个标签之间以 ',' 分隔)
+                    <br><br>
+                    <button class="btn btn-primary" type="submit">提交</button>
+                    <input class="btn btn-dark" type="button" value="放弃编辑" onclick="back()">
 
-                                <label class="required" for="id_category">分类：</label>
-                                <input name="category" class="vTextFiled"  id="id_category" required=""
-                                       type="text" maxlength="30" value="生活">
-                                <span></span><span></span>
-
-                                <label for="id_tag">标签：</label>
-                                <input name="tag" class="vTextFiled" id="id_tag" type="text" maxlength="150">
-                                (多个标签之间以 ',' 分隔)
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-row field-content">
-                            <div>
-                                <label class="required" for="id_content">内容：</label>
-                                <textarea name="content" class="vLargeTextField" id="id_content"
-                                          required="" rows="10" cols="40">{{ blog.content }}</textarea>
-                            </div>
-                        </div>
-                        <!--
-                        <div class="form-row field-category">
-                            <label class="required" for="id_category">分类：</label>
-                            <div class="related-widget-wrapper">
-                                <select name="category" id="id_category" required="">
-                                    <option value="">----------</option>
-                                    <option value="1" selected="">生活</option>
-                                    <option value="2">技术</option>
-                                    <option value="3">电子</option>
-                                </select>
-                            </div>
-                        </div>
-                        -->
-                    </fieldset>
-                </div>
-                <div class="submit-row">
-
-                </div>
-                <button type="submit" style="margin-top: 10px ">提交</button>
-                <input type="button" value="放弃编辑" onclick="back()">
-                <!--<input type="button" value="返回" onclick="back()">-->
-            </form>
+                </form>
+            </div>
         </div>
+
+
+
+    </div>
+    {% endblock %}
 
 </body>
 </html>

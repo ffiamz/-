@@ -29,6 +29,8 @@
                         {% get_recent_blogs as recent_post_list %}
                         <ul>
                             {% for post in recent_post_list %}
+                            <br>
+
                             <li>
                                 <a href="{% url 'blog_index' post.id %}">{{ post.title }}</a>
                             </li>
@@ -42,6 +44,7 @@
             </div>
             <div class="col-sm-8">
                 {% for blog in blogs %}
+                <br>
                 <div align="left" class="blog">
                     <div class="title">
                         <a href="{% url 'blog_index' blog.id %}"><h2>{{ blog.title }}</h2></a>

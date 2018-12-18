@@ -33,6 +33,15 @@ function back(){
                         <label for="body">正文</label>
                         <textarea type="text" class="form-control" id="body" name="content" rows="12"></textarea>
                     </div>
+
+                    <br><br>
+                    <label for="id_category">分类：</label>
+                    <input name="category" class="vTextFiled"  id="id_category" required=""
+                                       type="text" maxlength="30">
+                    <label for="id_tag">标签：</label>
+                    <input name="tag" class="vTextFiled" id="id_tag" type="text" maxlength="150">
+                        (多个标签之间以 ',' 分隔)
+                    <br><br>
                     <button class="btn btn-primary" type="submit">提交</button>
                     <input class="btn btn-dark" type="button" value="放弃编辑" onclick="back()">
 
