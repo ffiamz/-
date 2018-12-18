@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% extends 'base.html' %}
+    {% load staticfiles %}
+
     <meta charset="UTF-8">
-    <title>我的博客</title>
-    <style type="text/css">
-        .blog{
-            padding: 20px 0px;
-        }
-        .blog .info span{
-            padding-right: 10px;
-        }
-        .blog .summary{
-            padding-top: 20px;
-        }
-    </style>
+    <title>写文章</title>
+
 </head>
 <body>
 
+    {% block main %}
 <script>
 function back(){
     location.href = "{% url 'blog_view' %}";
 }
 </script>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <br>
+                <form method="POST" action=".">
+                    {% csrf_token %}
+                    <!--标题-->
+                    <div class="form-group">
+                        <label for="title">标题</label>
+                        <input type="text" class="form-control" id="title" name="title">
 
+                    </div>
+                    <!--正文-->
+                    <div class="form-group">
+                        <label for="body">正文</label>
+                        <textarea type="text" class="form-control" id="body" name="content" rows="12"></textarea>
+                    </div>
+                    <button class="btn btn-primary" type="submit">提交</button>
+                    <input class="btn btn-dark" type="button" value="放弃编辑" onclick="back()">
+
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!--
         <div class="blog_post" style="padding-top: 20px;">
             <h3>编辑博客</h3>
             <form action="." method="post">
@@ -66,6 +88,7 @@ function back(){
                 <input type="button" value="放弃编辑" onclick="back()">
             </form>
         </div>
-
+    -->
+        {% endblock %}
 </body>
 </html>
