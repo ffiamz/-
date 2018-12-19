@@ -29,10 +29,9 @@
                         <div class="widget widget-archives">
                             <h3 class="widget-title">归档</h3>
                             {% archives as date_list %}
-                            <ul>
+                            <ul class="list-group">
                                 {% for date in date_list %}
-                                <br>
-                                <li>
+                                <li class="list-group-item">
                                     <a href="{% url 'archives' date.year date.month %}">{{ date.year }}年 {{ date.month }} 月</a>
                                 </li>
                                 {% empty %}
@@ -45,10 +44,9 @@
                         <div class="widget widget-category">
                             <h3 class="widget-title">分类</h3>
                             {% get_categories as category_list %}
-                            <ul>
+                            <ul class="list-group">
                                 {% for category in category_list %}
-                                <br>
-                                <li>
+                                <li class="list-group-item">
                                     <a href="{% url 'category' category.pk %}">{{ category.name }}
 
                                     </a>
@@ -63,10 +61,9 @@
                         <div class="widget-category">
                             <h3 class="widget-title">标签</h3>
                             {% get_tags as tag_list %}
-                            <ul>
+                            <ul class="list-group">
                                 {% for tag in tag_list %}
-                                <br>
-                                <li>
+                                <li class="list-group-item">
                                     <a href="{% url 'tag' tag.id %}">{{ tag.name }}</a>
                                 </li>
                                 {% empty %}

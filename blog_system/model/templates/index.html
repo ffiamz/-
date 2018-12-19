@@ -21,38 +21,42 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-
-
-
                     <div class="widget widget-recent-posts">
                         <h3 class="widget-title">最新文章</h3>
                         {% get_recent_blogs as recent_post_list %}
-                        <ul>
+                        <ul class="list-group">
                             {% for post in recent_post_list %}
-                            <br>
-
-                            <li>
-                                <a href="{% url 'blog_index' post.id %}">{{ post.title }}</a>
+                            <li class="list-group-item">
+                                <a href="{% url 'blog_get_detail' post.id %}"
+                                    class="text-dark">
+                                    {{ post.title }}
+                                </a>
                             </li>
                             {% empty %}
                             暂无文章！
                             {% endfor %}
                         </ul>
                     </div>
-
-
             </div>
             <div class="col-sm-8">
                 {% for blog in blogs %}
-                <br>
-                <div align="left" class="blog">
+                <div align="left" class="blog border-bottom media-body pb-3 mb-3 small">
                     <div class="title">
-                        <a href="{% url 'blog_index' blog.id %}"><h2>{{ blog.title }}</h2></a>
+                        <a href="{% url 'blog_get_detail' blog.id %}"
+                            class="text-dark">
+                            <h2>{{ blog.title }}</h2>
+                        </a>
                     </div>
                     <div class="info">
-                        <span class="category" style="color: #ff9900;">{{ blog.category.name }}</span>
-                        <span class="author" style="color: #4a86e8;">{{ blog.author }}</span>
-                        <span class="pub" style="color: #6aa84e">{{ blog.pub }}</span>
+                        <span class="category" style="color: #4a86e8;">
+                            {{ blog.category.name }}
+                        </span>
+                        <span class="author" style="color: #4a86e8;">
+                            {{ blog.author }}
+                        </span>
+                        <span class="pub" style="color: #6aa84e">
+                            {{ blog.pub }}
+                        </span>
                     </div>
                     <div class="summary">
                         {{ blog.content | truncatechars:100 }}
