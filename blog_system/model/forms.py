@@ -13,7 +13,6 @@ class CommentForm(forms.Form):
 
 
 class AddBlog(forms.Form):
-    # title =
     title = forms.CharField(label=u'标题', max_length=30, error_messages={
         'required': '请填写您的标题',
         'max_length': '标题太长了'

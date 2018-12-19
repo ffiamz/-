@@ -105,7 +105,7 @@ def remove_blog_from_collect():
 
 def add_blog(request):
     if not request.user.is_authenticated:
-        return HttpResponse("请先登录<br><a href='/login'>前往登陆</a><br><a href='/index'>返回</a>")
+        return HttpResponseRedirect('/login')
 
     if request.method == 'GET':
         blog_form = AddBlog()
@@ -182,12 +182,16 @@ def update_blog(request, blog_id):
 
 # 展示博客列表
 def get_blogs(request):
+    blogs = Blog.objects.all()
+    return render(request, 'blog/blog_list.html', 
+            {'blogs': blogs})  
+
+def get_my_blogs(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect('/login')
-    # blogs = Blog.objects.all().order_by('-pub')  # 获得所有的博客按时间排序
     blogs = Blog.objects.filter(author=request.user)
-    # print(blogs[0], ' ', blogs[0].author, ' ', blogs[0].content)
-    return render(request, 'blog/blog_list.html', {'blogs': blogs, 'author': request.user})  
+    return render(request, 'blog/blog_list.html', 
+            {'blogs': blogs, 'author': request.user})  
 
 
 def get_index_detail(request, blog_id):
@@ -209,9 +213,8 @@ def get_index_detail(request, blog_id):
         if request.method == 'GET':
             form = CommentForm()
         else:  # 请求方法为post
-
             if not request.user.is_authenticated:
-                return HttpResponse("请先登录<br><a href='/login'>前往登陆</a><br><a href='/index'>返回</a>")
+                return HttpResponseRedirect('/login')
 
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -277,7 +280,6 @@ def archives(request, year, month):
     #                                pub__month=month
     #                               )
     post_list = Blog.objects.filter(pub__startswith='%d-%d'%(year, month), author=request.user)
-    # print('year ', year, 'month', month, len(post_list))
     return render(request, 'blog/blog_list.html', {'blogs': post_list, 'author': request.user})
 
 

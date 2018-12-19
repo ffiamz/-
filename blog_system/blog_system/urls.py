@@ -20,6 +20,7 @@ from model import views, user
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
+    url(r'^$', views.index),
     url(r'^index$', views.index),
 
     url(r'^teams$', views.teams),
@@ -39,7 +40,8 @@ urlpatterns = [
     
     #path('blog/', include('model.urls')),
     
-    path('', views.get_blogs, name='blog_view'),
+    path('blogs', views.get_blogs, name='blog_view'),
+    path('myblogs', views.get_my_blogs, name='my_blog_view'),
     path('create-blog/', views.add_blog, name="add_blog"),
     path('detail/<int:blog_id>', views.get_details, name='blog_get_detail'),
     path('delete/<int:blog_id>', views.delete_blog, name="delete_blog"),
